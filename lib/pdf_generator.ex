@@ -145,7 +145,9 @@ defmodule PdfGenerator do
       {:ok, encrypted_pdf}
     else
       {:error, reason}     -> {:error, reason}
-      {:result_ok, _, err} -> {:error, {:generator_failed, err}}
+      {:result_ok, _, err} ->
+        IO.inspect(exit_code, label: "pdf generator failed with exit code")
+        {:error, {:generator_failed, err}}
       reason               -> {:error, reason}
     end
   end

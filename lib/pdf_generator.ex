@@ -252,7 +252,7 @@ defmodule PdfGenerator do
 
   defp result_ok(:chrome,     _string,          0), do: true
   defp result_ok(:chrome,     _string, _exit_code), do: false
-  defp result_ok(:wkhtmltopdf, string, _exit_code), do: String.match?(string, ~r/Done/ms)
+  defp result_ok(:wkhtmltopdf, string, _exit_code), do: String.match?(IO.inspect(string, label: "wkhtmltopdf output"), ~r/Done/ms)
 
   defp get_command_prefix(options) do
     options[:command_prefix] || Application.get_env(:pdf_generator, :command_prefix)
